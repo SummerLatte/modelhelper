@@ -13,8 +13,11 @@ class ModelHelper:
 
 
     def loadSaveDict(self):
-         with open(f"{self.path}/{self.modelName}.json", "r") as f:
-            self.saveDict = json.load(f)
+        try:
+            with open(f"{self.path}/{self.modelName}.json", "r") as f:
+                self.saveDict = json.load(f)
+        except FileNotFoundError:
+            print(f"The file {self.modelName}.json does not exist in the directory {self.path}.")
 
     def getMaxValidCorrect(self):
         return max(self.saveDict["validCorrect"])
